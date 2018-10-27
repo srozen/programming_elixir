@@ -1,5 +1,5 @@
 defmodule Factorial do
-  def fact(n) do
+  def fact(n) when is_integer(n) and n >= 0 do
     facto(n,1)
   end
 
