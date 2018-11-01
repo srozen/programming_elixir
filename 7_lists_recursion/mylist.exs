@@ -8,12 +8,12 @@ defmodule Mylist do
     [rem(rem(head, 96)+offset, 26)+96|caesar(tail, offset)]
   end
 
-  def fromto(to , to) do
+  def span(to , to) do
     [to]
   end
 
-  def fromto(from, to) do
-    [from|fromto(from+1, to)]
+  def span(from, to) do
+    [from|span(from+1, to)]
   end
 
 
