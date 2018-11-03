@@ -8,6 +8,7 @@ defmodule Issues.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
+      source_url: "https://github.com/srozen/programming_elixir",
       deps: deps()
     ]
   end
@@ -27,7 +28,11 @@ defmodule Issues.MixProject do
       # HTTP Lib
       {:httpoison, "~> 1.4"},
       # Json Parsing Lib
-      {:poison, "~> 4.0"}
+      {:poison, "~> 4.0"},
+      # Doc
+      {:ex_doc, "~> 0.19.1"},
+      # Markdown to HTML
+      {:earmark, "~> 1.2"}
     ]
   end
 
