@@ -1,18 +1,15 @@
-defmodule Stackmanager do
-  @moduledoc """
-  Documentation for Stackmanager.
-  """
+defmodule StackManager do
+  @server StackManager.Server
 
-  @doc """
-  Hello world.
+  def start_link(list) do
+    GenServer.start_link(@server, list, name: @server)
+  end
 
-  ## Examples
+  def pop do
+    GenServer.call(@server, :pop)
+  end
 
-      iex> Stackmanager.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def push(item) do
+    GenServer.cast(@server, {:push, item})
   end
 end

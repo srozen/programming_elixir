@@ -4,6 +4,10 @@ defmodule StackManager.Server do
     {:ok, list}
   end
 
+  def terminate(reason, _) do
+    IO.puts "#{inspect reason}"
+  end
+
   def handle_call(:pop, _from, list) do
     case list do
       [head|tail] ->
@@ -14,6 +18,11 @@ defmodule StackManager.Server do
   end
 
   def handle_cast({:push, item}, list) do
-    {:noreply, [item|list]}
+    case item do
+      [] ->
+        System.stop(0)
+      _ ->
+        {:noreply, [item|list]}
+    end
   end
 end
