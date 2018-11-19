@@ -9,6 +9,7 @@ defmodule Duper.Application do
     # List all child processes to be supervised
     children = [
       Duper.Results,
+      {Duper.PathFinder, "."},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
