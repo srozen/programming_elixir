@@ -5,8 +5,8 @@ defmodule Sequence.Stash do
 
   # API
 
-  def start_link(initial_number) do
-    GenServer.start_link(__MODULE__, initial_number, name: @me)
+  def start_link({initial_number, delta}) do
+    GenServer.start_link(__MODULE__, {initial_number, delta}, name: @me)
   end
 
   def get() do
@@ -19,15 +19,15 @@ defmodule Sequence.Stash do
 
   # Server Implementation
 
-  def init(initial_number) do
-    {:ok, initial_number}
+  def init({initial_number, delta}) do
+    {:ok, %Sequence.Server.State{current_number: initial_number, delta: delta}}
   end
 
-  def handle_call({:get}, _from, current_number) do
-    {:reply, current_number, current_number}
+  def handle_call({:get}, _from, state) do
+    {:reply, state, state}
   end
 
-  def handle_cast({:update, new_number}, _) do
-    {:noreply, new_number}
+  def handle_cast({:update, new_state}, _old_state) do
+    {:noreply, new_state}
   end
 end

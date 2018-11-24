@@ -5,10 +5,10 @@ defmodule Sequence.Application do
 
   use Application
 
-  def start(_type, initial_number) do
+  def start(_type, [initial_number, delta]) do
     # List all child processes to be supervised
     children = [
-      { Sequence.Stash, initial_number },
+      { Sequence.Stash, {initial_number, delta} },
       { Sequence.Server, nil },
     ]
 
