@@ -4,4 +4,4 @@ a = 2
 a = 1 # ok
 ^a = 2 # nok
 ^a = 1 # ok
-^a = 2 - a
+^a = 2 - a # ok
