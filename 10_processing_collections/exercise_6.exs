@@ -1,22 +1,22 @@
 defmodule MyEnum do
   def flatten(list) do
-    flatten(list, [])
+    _flatten(list, [])
     |> Enum.reverse
   end
 
-  def flatten([head | tail], acc) when head == [] do
-    flatten(tail, acc)
+  defp _flatten([head | tail], acc) when is_list(head) do
+    _flatten(tail, _flatten(head, acc))
   end
 
-  def flatten([head | tail], acc) when is_list(head) do
-    flatten(tail, flatten(head, acc))
+  defp _flatten([head | tail], acc) when head == [] do
+    _flatten(tail, acc)
   end
 
-  def flatten([head | tail], acc) do
-    flatten(tail, [head | acc])
+  defp _flatten([head | tail], acc) do
+    _flatten(tail, [head | acc])
   end
 
-  def flatten([], acc) do
+  defp _flatten([], acc) do
     acc
   end
 end
@@ -30,5 +30,10 @@ MyEnum.flatten([1, [2]])
 |> IO.puts
 
 MyEnum.flatten([1, [2, 3]])
+|> inspect(charlists: :as_lists)
+|> IO.puts
+
+
+MyEnum.flatten([1, [2, 3], [1, [2, 3]]])
 |> inspect(charlists: :as_lists)
 |> IO.puts
