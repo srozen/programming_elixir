@@ -13,8 +13,10 @@ defmodule Issues.GithubIssues do
   end
 
   def handle_response({_, %{status_code: status_code, body: body}}) do
-    status_code |> check_for_error()
-    body |> Jason.decode!()
+    {
+      status_code |> check_for_error(),
+      body |> Jason.decode!()
+    }
   end
 
   defp check_for_error(200), do: :ok
