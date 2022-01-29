@@ -16,19 +16,6 @@ defmodule Issues.GithubIssues do
     "#{@github_url}/repos/#{user}/#{project}/issues"
   end
 
-  @spec handle_response(
-          {any,
-           %{
-             :body =>
-               binary
-               | maybe_improper_list(
-                   binary | maybe_improper_list(any, binary | []) | byte,
-                   binary | []
-                 ),
-             :status_code => any,
-             optional(any) => any
-           }}
-        ) :: {:error, any} | {:ok, any}
   def handle_response({_, %{status_code: status_code, body: body}}) do
     Logger.info("Got response: status code =#{status_code}")
     Logger.debug(fn  -> inspect(body) end)
