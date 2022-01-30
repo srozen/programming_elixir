@@ -15,9 +15,10 @@ defmodule Issues.CLI do
   end
 
   def process(:help) do
-    IO.puts """
+    IO.puts("""
     usage: issues <user> <project> [count | #{@default_count}]
-    """
+    """)
+
     System.halt(0)
   end
 
@@ -56,21 +57,22 @@ defmodule Issues.CLI do
   end
 
   defp decode_response({:ok, body}), do: body
+
   defp decode_response({:error, error}) do
-    IO.puts "Error fetching from Github: #{error["message"]}"
+    IO.puts("Error fetching from Github: #{error["message"]}")
     System.halt(2)
   end
 
   def sort_into_descending_order(list_of_issues) do
     list_of_issues
     |> Enum.sort(fn issue1, issue2 ->
-        issue1["created_at"] >= issue2["created_at"]
-      end)
+      issue1["created_at"] >= issue2["created_at"]
+    end)
   end
 
   def get_last_items(enumerable, count) do
     enumerable
     |> Enum.take(count)
-    |> Enum.reverse
+    |> Enum.reverse()
   end
 end

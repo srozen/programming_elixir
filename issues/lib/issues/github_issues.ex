@@ -5,7 +5,7 @@ defmodule Issues.GithubIssues do
   @user_agent [{"User-agent", "Elixir spat.monroe@gmail.com"}]
 
   def fetch(user, project) do
-    Logger.info(fn  -> "Fetching #{user}'s project #{project}" end)
+    Logger.info(fn -> "Fetching #{user}'s project #{project}" end)
 
     issues_url(user, project)
     |> HTTPoison.get(@user_agent)
@@ -18,7 +18,8 @@ defmodule Issues.GithubIssues do
 
   def handle_response({_, %{status_code: status_code, body: body}}) do
     Logger.info("Got response: status code =#{status_code}")
-    Logger.debug(fn  -> inspect(body) end)
+    Logger.debug(fn -> inspect(body) end)
+
     {
       status_code |> check_for_error(),
       body |> Jason.decode!()
