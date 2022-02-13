@@ -1,9 +1,9 @@
-defmodule Stack.MixProject do
+defmodule SupervisedSequence.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :stack,
+      app: :supervised_sequence,
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule Stack.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Stack.Application, []}
+      mod: {SupervisedSequence.Application, []}
     ]
   end
 

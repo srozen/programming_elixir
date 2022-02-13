@@ -1,8 +1,20 @@
 defmodule Stack.Server do
   use GenServer
 
-  def init(base_stack) do
-    {:ok, base_stack}
+  def start_link(base_stack \\ []) do
+    GenServer.start_link(__MODULE__, base_stack, name: __MODULE__)
+  end
+
+  def pop do
+    GenServer.call(__MODULE__, {:pop})
+  end
+
+  def push(item) do
+    GenServer.cast(__MODULE__, {:push, item})
+  end
+
+  def init(_) do
+    {:ok, Stack.Stash.get}
   end
 
 
@@ -17,13 +29,12 @@ defmodule Stack.Server do
 
   def handle_cast({:push, item}, stack) do
     case item do
-      item when is_integer(item) -> System.halt(item)
+      item when is_integer(item) -> raise ArgumentError, message: "Integers forbidden in this stack"
       item -> {:noreply, [item|stack]}
     end
   end
 
-  def terminate(reason, state) do
-    IO.puts(reason)
-    IO.puts(state)
+  def terminate(_reason, state) do
+    Stack.Stash.update(state)
   end
 end
