@@ -4,11 +4,11 @@ defmodule Issues.MixProject do
   def project do
     [
       app: :issues,
+      name: "Issues",
       escript: escript_config(),
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
-      source_url: "https://github.com/srozen/programming_elixir",
       deps: deps()
     ]
   end
@@ -23,16 +23,12 @@ defmodule Issues.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:httpoison, "~> 1.8"},
+      {:jason, "~> 1.3"},
+      {:ex_doc, "~> 0.28.0"},
+      {:earmark, "~> 1.4"}
       # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
-      # HTTP Lib
-      {:httpoison, "~> 1.4"},
-      # Json Parsing Lib
-      {:poison, "~> 4.0"},
-      # Doc
-      {:ex_doc, "~> 0.19.1"},
-      # Markdown to HTML
-      {:earmark, "~> 1.2"}
+      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
 
